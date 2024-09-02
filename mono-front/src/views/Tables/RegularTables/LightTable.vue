@@ -1,7 +1,7 @@
 <template>
   <b-card no-body>
     <b-card-header class="border-0">
-      <h3 class="mb-0">신고 목록</h3>
+      <h3 class="mb-0">문의 목록</h3>
     </b-card-header>
 
     <el-table

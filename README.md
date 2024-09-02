@@ -1,6 +1,6 @@
 ![header](https://capsule-render.vercel.app/api?type=venom&text=Fight%20World!%20Delivery)
 
-배달 플랫폼 Api를 이용해 만든 관리자 전용 백오피스 사이트 입니다.
+[배달 플랫폼 Api](https://github.com/FIGHT-WORLD/Delivery_V1)를 이용해 만든 관리자 전용 백오피스 사이트 입니다.
 <br>
 
 <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=Vue.js&logoColor=white"/>

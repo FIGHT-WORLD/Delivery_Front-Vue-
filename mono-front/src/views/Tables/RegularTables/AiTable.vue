@@ -1,56 +1,51 @@
 <template>
   <b-card no-body>
     <b-card-header class="border-0">
-      <h3 class="mb-0">유저 목록</h3>
+      <h3 class="mb-0">AI 요청 기록</h3>
     </b-card-header>
 
     <el-table
       class="table-responsive table"
       header-row-class-name="thead-light"
-      :data="users"
+      :data="aiRequests"
       @row-click="handleRowClick"
     >
-      <el-table-column label="유저 이름" min-width="200px" prop="username">
-        <template v-slot="{ row }">
-          <b-media no-body class="align-items-center">
-            <b-media-body>
-              <span class="font-weight-600 name mb-0 text-sm">{{
-                row.username
-              }}</span>
-            </b-media-body>
-          </b-media>
-        </template>
+      <el-table-column label="상점 ID" min-width="100px" prop="storeId">
       </el-table-column>
 
-      <el-table-column label="닉네임" prop="nickname" min-width="200px">
-      </el-table-column>
-
-      <el-table-column label="이메일" prop="email" min-width="250px">
-      </el-table-column>
-
-      <el-table-column label="Role" prop="role" min-width="150px">
-      </el-table-column>
-
-      <el-table-column label="가입일" prop="createdAt" min-width="200px">
+      <el-table-column label="요청 날짜" min-width="200px" prop="createdAt">
         <template v-slot="{ row }">
           {{ formatDate(row.createdAt) }}
         </template>
       </el-table-column>
 
+      <el-table-column label="요청 내용" prop="asking" min-width="300px">
+      </el-table-column>
+
+      <el-table-column label="응답 내용" prop="answer" min-width="400px">
+      </el-table-column>
+
       <el-table-column
-        label="유저 ID"
-        prop="userId"
+        label="메뉴 ID"
+        prop="menuId"
         min-width="100px"
-        v-if="false"
       >
       </el-table-column>
+
+      <!-- <el-table-column
+        label="프롬프트 ID"
+        prop="promptId"
+        min-width="300px"
+      >
+      </el-table-column> -->
     </el-table>
 
     <b-card-footer class="py-4 d-flex justify-content-end">
       <base-pagination
         v-model="currentPage"
-        :per-page="10"
+        :per-page="pageSize"
         :total="totalElements"
+        @page-changed="fetchAiRequests"
       ></base-pagination>
     </b-card-footer>
   </b-card>
@@ -61,42 +56,43 @@ import axios from "axios";
 import { Table, TableColumn } from "element-ui";
 
 export default {
-  name: "users-table",
+  name: "ai-requests-table",
   components: {
     [Table.name]: Table,
     [TableColumn.name]: TableColumn,
   },
   data() {
     return {
-      users: [], // API에서 받은 데이터 저장
+      aiRequests: [], // API에서 받은 데이터 저장
       currentPage: 1,
+      pageSize: 10,
       totalElements: 0,
     };
   },
   methods: {
-    fetchUsers() {
+    fetchAiRequests() {
       const token = localStorage.getItem("jwtToken");
       axios
-        .get("http://localhost:8080/api/v1/users", {
+        .get("http://localhost:8080/api/v1/ai/admin/ai-request", {
           params: {
             page: this.currentPage - 1,
-            size: 10,
+            size: this.pageSize,
           },
-          headers: {
+        headers: {
             Authorization: token,
           },
         })
         .then((response) => {
-          this.users = response.data.data.content;
+          this.aiRequests = response.data.data.content;
           this.totalElements = response.data.data.totalElements;
         })
         .catch((error) => {
-          console.error("Error fetching users:", error);
-          alert("Failed to load users");
+          console.error("Error fetching AI requests:", error);
+          alert("Failed to load AI requests");
         });
     },
     handleRowClick(row) {
-      this.$router.push({ path: `/users/${row.userId}` }); // userId에 맞게 라우팅
+      this.$router.push({ path: `/ai-request/${row.promptId}` }); // 프롬프트 ID에 맞게 라우팅
     },
     formatDate(dateString) {
       const options = {
@@ -110,7 +106,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchUsers(); // 컴포넌트가 마운트될 때 데이터 가져오기
+    this.fetchAiRequests(); // 컴포넌트가 마운트될 때 데이터 가져오기
   },
 };
 </script>

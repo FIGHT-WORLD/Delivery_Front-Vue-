@@ -39,8 +39,7 @@
             <p><strong>이름:</strong> {{ store.name }}</p>
             <p><strong>주소:</strong> {{ store.address }}</p>
             <p><strong>오픈 시간:</strong> {{ formatTime(store.open_at) }}</p>
-            <p><strong>오픈 시간:</strong> {{ formatTime(store.close_at) }}</p>
-            <p><strong>마감 시간:</strong> {{ store.close_at }}</p>
+            <p><strong>마감 시간:</strong> {{ formatTime(store.close_at) }}</p>
             <p><strong>가게 번호:</strong> {{ store.phone_number }}</p>
             <p><strong>업종:</strong> {{ store.store_category }}</p>
             <p><strong>영업 정보:</strong> {{ store.status }}</p>

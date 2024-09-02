@@ -39,6 +39,15 @@
         >
         </sidebar-item>
 
+           <sidebar-item
+          :link="{
+            name: 'Ai',
+            path: '/ai',
+            icon: 'ni ni-planet text-blue',
+          }"
+        >
+        </sidebar-item>
+
         <!-- <sidebar-item
             :link="{
               name: 'Icons',

@@ -5,6 +5,9 @@
 
 <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=Vue.js&logoColor=white"/>
 
+## 🖥️ 시연 영상 
+https://www.youtube.com/watch?v=mY0nwKAMpck&t=3s
+
 ## 🍏 Personal Role
 <img width="597" alt="스크린샷 2024-09-03 오전 1 09 17" src="https://github.com/user-attachments/assets/86456015-bf10-41ba-b2e6-5c92541e3648">
 
